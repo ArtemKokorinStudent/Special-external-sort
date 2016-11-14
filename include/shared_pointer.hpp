@@ -22,12 +22,6 @@ private:
 	size_t * counter;
 };
 
-template <typename T, class ...Args>
-auto make_shared(Args && ...args) -> shared_pointer<T>
-{
-	return shared_pointer<T>(new T(std::forward<Args>(args)...));
-}
-
 template <typename T>
 shared_pointer<T>::shared_pointer() : 
 	pointer(nullptr), 
