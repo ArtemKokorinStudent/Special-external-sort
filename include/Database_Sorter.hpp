@@ -41,6 +41,7 @@ std::istream & operator>>(std::istream & input, person & _person)
 	input >> _person.year;
 	return input;
 }
+
 using Buckets = std::vector<std::vector<person>>;
 using Persons = std::vector<person>;
 class Persons_File {
