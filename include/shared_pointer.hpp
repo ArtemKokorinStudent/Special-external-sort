@@ -1,155 +1,205 @@
-#include <iostream>
-
-template <typename T>
-class shared_pointer {
-public:
-	shared_pointer(); /*noexcept*/
-	shared_pointer(T * object_address); /*strong*/
-	shared_pointer(shared_pointer const & other_shared_pointer); /*noexcept*/
-	auto operator=(shared_pointer const & other_shared_pointer) -> shared_pointer &; /*noexcept*/
-	shared_pointer(shared_pointer && other_shared_pointer); /*noexcept*/
-	auto operator=(shared_pointer && other_shared_pointer) -> shared_pointer &; /*noexcept*/
-	~shared_pointer(); /*noexcept*/
-
-	void swap(shared_pointer &); /*noexcept*/
-	void reset(); /*noexcept*/
-	auto get() const -> T *; /*noexcept*/
-	auto operator->() const -> T *; /*strong*/
-	auto operator*() const -> T &; /*strong*/
-	auto getNReferences() const -> size_t; /*noexcept*/
-private:
-	T * pointer;
-	size_t * counter;
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <vector>
+size_t letterI(const char letter, const bool is_capital) {
+	int first_letter_code = static_cast<int>(is_capital ? 'А' : 'а');
+	if (letter > (is_capital ? 'Е' : 'е')) {
+		return static_cast<int>(letter) - first_letter_code + 2;
+	}
+	else {
+		if (letter == (is_capital ? 'Ё' : 'ё')) {
+			return 7;
+		}
+		return static_cast<int>(letter) - first_letter_code + 1;
+	}
+}
+struct person {
+	std::string surname;
+	std::string name;
+	size_t year;
+	size_t i(size_t sort_i) const {
+		if (sort_i < surname.length()) {
+			return letterI(surname[sort_i], sort_i == 0);
+		}
+		else {
+			return 0;
+		}
+	}
 };
-
-template <typename T, class ...Args>
-auto make_shared(Args && ...args) -> shared_pointer<T>
+std::ostream & operator<<(std::ostream & output, person const & _person)
 {
-	return shared_pointer<T>(new T(std::forward<Args>(args)...));
+	output << _person.surname << " ";
+	output << _person.name << " ";
+	output << _person.year;
+	return output;
 }
-
-template <typename T>
-shared_pointer<T>::shared_pointer() : 
-	pointer(nullptr), 
-	counter(nullptr) 
+std::istream & operator>>(std::istream & input, person & _person)
 {
-	;
+	input >> _person.surname;
+	input >> _person.name;
+	input >> _person.year;
+	return input;
 }
-
-template <typename T>
-shared_pointer<T>::shared_pointer(T * object_address) :
-	pointer(object_address),
-	counter(new size_t(1))
-{
-	;
-}
-
-template <typename T>
-shared_pointer<T>::shared_pointer(shared_pointer const & other_shared_pointer) : 
-	pointer(other_shared_pointer.pointer), 
-	counter(other_shared_pointer.counter)
-{
-	if (counter != nullptr) {
-		++(*counter);
+using Buckets = std::vector<std::vector<person>>;
+using Persons = std::vector<person>;
+class Persons_File {
+public:
+	Persons_File() : is_empty(true), file_size(0) {
+		;
 	}
-}
+	std::string file_name;
+	bool is_empty;
+	size_t file_size;
+	std::fstream stream;
+	void openNew(std::string _file_name) {
+		file_name = _file_name;
+		stream.open(file_name, std::ios::out);
+	}
+	void addToSize(person _person) {
+		file_size += _person.surname.size();
+		file_size += _person.name.size();
+		file_size += sizeof(_person.year);
+		file_size += 1 + 1 + 2;
+	}
+};
+using Output_Files = std::vector<std::ofstream>;
 
-template <typename T>
-auto shared_pointer<T>::operator=(shared_pointer const & other_shared_pointer) -> shared_pointer &
-{
-	if (this != &other_shared_pointer)
+class Persons_Sorter {
+	bool is_database_empty;
+	std::string database_file_name;
+	std::string vault_file_name;
+public:
+	Persons_Sorter(std::string database_file_name, std::string output_file_name, size_t _RAM_amount)
+		: database_file_name(database_file_name),
+		database_file(database_file_name),
+		output_file(output_file_name),
+		RAM_amount(_RAM_amount),
+		is_database_empty(true)
 	{
-		(shared_pointer<T>(other_shared_pointer)).swap(*this);
+		vault_file_name = "F:\\1\\temp_files\\";
 	}
-	return *this;
-}
-
-template <typename T>
-shared_pointer<T>::shared_pointer(shared_pointer && other_shared_pointer) : 
-	pointer(other_shared_pointer.pointer), 
-	counter(other_shared_pointer.counter)
-{
-	other_shared_pointer.pointer = nullptr;
-	other_shared_pointer.counter = nullptr;
-}
-
-template <typename T>
-auto shared_pointer<T>::operator=(shared_pointer && other_shared_pointer) -> shared_pointer&
-{
-	if (this != &other_shared_pointer) {
-		(shared_pointer<T>(std::move(other_shared_pointer))).swap(*this);
+	void sortDatabase() {
+		sortFile(database_file, database_file_name, RAM_amount + 1, 0);
 	}
-	return *this;
-}
-
-template <typename T>
-shared_pointer<T>::~shared_pointer()
-{
-	if (counter != nullptr) {
-		(*counter)--;
-		if ((*counter) == 0) {
-			delete pointer;
-			delete counter;
+	
+	~Persons_Sorter() {
+		database_file.close();
+		output_file.close();
+	}
+private:
+	void sortFile(std::ifstream & file, std::string file_name, size_t file_size, size_t sort_i) {
+		if (file_size < RAM_amount) {
+			RAMsort(file, sort_i);
+		}
+		else {
+			std::vector<Persons_File> persons_files = stuffPersonsToFiles(file, file_name, sort_i);
+			for (size_t i = 0; i < persons_files.size(); i++) {
+				if (persons_files[i].file_size != 0) {
+					std::ifstream temp_file(persons_files[i].file_name);
+					sortFile(temp_file, persons_files[i].file_name, persons_files[i].file_size, sort_i + 1);
+					temp_file.close();
+				}
+			}
 		}
 	}
-}
 
-template <typename T>
-void shared_pointer<T>::swap(shared_pointer & other_shared_pointer)
-{
-	std::swap(pointer, other_shared_pointer.pointer);
-	std::swap(counter, other_shared_pointer.counter);
-}
-
-template <typename T>
-void shared_pointer<T>::reset()
-{
-	if (counter != nullptr) {
-		(*counter)--;
-		if ((*counter) == 0) {
-			delete pointer;
-			delete counter;
+	void RAMsort(std::ifstream & file, size_t sort_i) {
+		persons_outputted = 0;
+		persons.clear();
+		readFileIntoRAM(file);
+		sortPersons(persons, 0);
+	}
+	void readFileIntoRAM(std::ifstream & file) {
+		while (!file.eof()) {
+			person current_person;
+			file >> current_person;
+			persons.push_back(current_person);
 		}
-		counter = nullptr;
 	}
-	pointer = nullptr;
-}
+	void sortPersons(Persons const & entered_persons, size_t sort_i) {
+		Buckets buckets = stuffPersonsToBuckets(entered_persons, sort_i);
+		if (isOnlyOneBucketFull(buckets, entered_persons, sort_i)) {
+			outputBucket(entered_persons, output_file);
+		}
+		else {
+			sortBuckets(buckets, sort_i + 1);
+		}
+	}
+	Buckets stuffPersonsToBuckets(Persons const & persons, size_t sort_i) {
+		Buckets buckets(34);
+		for (auto person : persons) {
+			size_t currentI = person.i(sort_i);
+			buckets[currentI].push_back(person);
+		}
+		return buckets;
+	}
+	bool isOnlyOneBucketFull(Buckets const & buckets, Persons const & persons, size_t sort_i) {
+		size_t first_bucket_i = persons[0].i(sort_i);
+		return buckets[first_bucket_i].size() == persons.size();
+	}
+	void outputBucket(Persons const & bucket, std::ofstream & sorted_persons_file) {
+		for (auto person : bucket) {
+			outputPerson(person);
+		}
+	}
+	void outputPerson(person _person) {
+		if (is_database_empty) {
+			is_database_empty = false;
+		}
+		else {
+			output_file << std::endl;
+		}
+		output_file << _person;
+		persons_outputted++;
+	}
+	void sortBuckets(Buckets const & buckets, size_t sort_i) {
+		for (auto bucket : buckets) {
+			if (!bucket.empty()) {
+				sortPersons(bucket, sort_i);
+			}
+		}
+	}
 
-template <typename T>
-auto shared_pointer<T>::get() const -> T*
-{
-	return pointer;
-}
-
-template <typename T>
-auto shared_pointer<T>::operator->() const -> T*
-{
-	if (pointer != nullptr) {
-		return pointer;
+	std::vector<Persons_File> stuffPersonsToFiles(std::ifstream & base_file, std::string base_file_name, size_t sort_i) {
+		std::vector<Persons_File> files = createDerivedFiles(base_file_name);
+		while (!base_file.eof()) {
+			person current_person;
+			base_file >> current_person;
+			size_t currentI = current_person.i(sort_i);
+			if (files[currentI].is_empty) {
+				files[currentI].is_empty = false;
+			}
+			else {
+				files[currentI].stream << std::endl;
+			}
+			files[currentI].stream << current_person;
+			files[currentI].addToSize(current_person);
+		}
+		for (size_t i = 0; i < files.size(); i++) {
+			files[i].stream.close();
+		}
+		return files;
 	}
-	else {
-		throw ("pointer == nullptr");
+	std::vector<Persons_File> createDerivedFiles(std::string base_file_name) {
+		std::vector<Persons_File> files(34);
+		for (size_t i = 0; i < files.size(); i++) {
+			std::stringstream string_stream;
+			std::string str;
+			if (base_file_name == database_file_name) {
+				string_stream << vault_file_name << i << ".txt";
+			}
+			else {
+				string_stream << base_file_name << "_" << i << ".txt";
+			}
+			string_stream >> str;
+			files[i].openNew(str);
+		}
+		return files;
 	}
-}
-
-template <typename T>
-auto shared_pointer<T>::operator*() const -> T &
-{
-	if (pointer != nullptr) {
-		return *pointer;
-	}
-	else {
-		throw ("pointer == nullptr");
-	}
-}
-
-template <typename T>
-auto shared_pointer<T>::getNReferences() const -> size_t
-{
-	if (counter != nullptr) {
-		return *counter;
-	}
-	else {
-		return 0;
-	}
-}
+	std::vector<person> persons;
+	size_t persons_outputted;
+	std::ifstream database_file;
+	std::ofstream output_file;
+	size_t RAM_amount;
+};
