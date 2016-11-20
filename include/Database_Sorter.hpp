@@ -4,7 +4,7 @@
 #include <vector>
 size_t letterI(const char letter, const bool is_capital) {
 	setlocale(LC_ALL, "ru_RU.utf8");
-	int first_letter_code = static_cast<int>(is_capital ? 'А' : 'а');
+	int first_letter_code = static_cast<int>(is_capital ? L'А' : 'а');
 	if (letter > (is_capital ? 'Е' : 'е')) {
 		return static_cast<int>(letter) - first_letter_code + 2;
 	}
