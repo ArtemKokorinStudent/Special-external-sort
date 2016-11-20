@@ -1,6 +1,6 @@
 # magic_box
 
-[![Build Status](https://travis-ci.org/ArtemKokorinStudent/shared-pointer.svg?branch=master)](https://travis-ci.org/ArtemKokorinStudent/shared-pointer)
+[![Build Status](https://travis-ci.org/ArtemKokorinStudent/External-sort.svg?branch=master)](https://travis-ci.org/ArtemKokorinStudent/External-sort)
 
 ```bash
 tools/build.sh #{PROJECT_NAME}
