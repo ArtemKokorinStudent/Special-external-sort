@@ -90,14 +90,20 @@ public:
 private:
 	void sortFile(std::ifstream & file, std::string file_name, size_t file_size, size_t sort_i) {
 		if (file_size < RAM_amount) {
-			RAMsort(file, sort_i);
+			
 		}
 		else {
 			std::vector<Persons_File> persons_files = stuffPersonsToFiles(file, file_name, sort_i);
 			for (size_t i = 0; i < persons_files.size(); i++) {
 				if (persons_files[i].file_size != 0) {
 					std::ifstream temp_file(persons_files[i].file_name);
-					sortFile(temp_file, persons_files[i].file_name, persons_files[i].file_size, sort_i + 1);
+					try {
+						sortFile(temp_file, persons_files[i].file_name, persons_files[i].file_size, sort_i + 1);
+					}
+					catch (...) {
+						system("pause");
+						throw;
+					}
 					temp_file.close();
 				}
 			}
