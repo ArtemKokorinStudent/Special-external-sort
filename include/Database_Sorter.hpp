@@ -65,12 +65,12 @@ public:
 };
 using Output_Files = std::vector<std::ofstream>;
 
-class Persons_Sorter {
+class Database_Sorter {
 	bool is_database_empty;
 	std::string database_file_name;
 	std::string vault_file_name;
 public:
-	Persons_Sorter(std::string database_file_name, std::string output_file_name, size_t _RAM_amount)
+	Database_Sorter(std::string database_file_name, std::string output_file_name, size_t _RAM_amount)
 		: database_file_name(database_file_name),
 		database_file(database_file_name),
 		output_file(output_file_name),
@@ -83,7 +83,7 @@ public:
 		sortFile(database_file, database_file_name, RAM_amount + 1, 0);
 	}
 	
-	~Persons_Sorter() {
+	~Database_Sorter() {
 		database_file.close();
 		output_file.close();
 	}
