@@ -108,7 +108,7 @@ private:
 		persons_outputted = 0;
 		persons.clear();
 		readFileIntoRAM(file);
-		sortPersons(persons, 0);
+		sortPersons(persons, sort_i);
 	}
 	void readFileIntoRAM(std::ifstream & file) {
 		while (!file.eof()) {
