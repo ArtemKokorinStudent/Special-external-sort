@@ -3,13 +3,12 @@
 #include <sstream>
 #include <vector>
 size_t letterI(const char letter, const bool is_capital) {
-	setlocale(LC_ALL, "ru_RU.utf8");
-	int first_letter_code = static_cast<int>(is_capital ? L'А' : 'а');
-	if (letter > (is_capital ? 'Е' : 'е')) {
+	int first_letter_code = static_cast<int>(is_capital ? L'А' : L'а');
+	if (letter > (is_capital ? L'Е' : L'е')) {
 		return static_cast<int>(letter) - first_letter_code + 2;
 	}
 	else {
-		if (letter == (is_capital ? 'Ё' : 'ё')) {
+		if (letter == (is_capital ? L'Ё' : L'ё')) {
 			return 7;
 		}
 		return static_cast<int>(letter) - first_letter_code + 1;
@@ -42,7 +41,6 @@ std::istream & operator>>(std::istream & input, person & _person)
 	input >> _person.year;
 	return input;
 }
-
 using Buckets = std::vector<std::vector<person>>;
 using Persons = std::vector<person>;
 class Persons_File {
