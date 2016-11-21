@@ -41,9 +41,7 @@ bool isANotMoreThanB(person A, person B) {
 		}
 		else {
 			if (A.surname[i] != B.surname[i]) {
-std::cout << A.surname[i];
-std::cout << B.surname[i];
-
+    REQUIRE(i == 1000000);
                                 REQUIRE(A.surname == B.surname);
 				return false;
 			}
