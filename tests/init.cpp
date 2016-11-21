@@ -84,4 +84,8 @@ SCENARIO("Sort", "[s]") {
 	
 	std::string str = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
 	REQUIRE(letterI(str[0], true) == 1);
+	REQUIRE(letterI(str[1], true) == 2);
+	REQUIRE(letterI(str[2], true) == 3);
+	REQUIRE(letterI(str[3], true) == 4);
+	REQUIRE(letterI(str[4], true) == 5);
 }
