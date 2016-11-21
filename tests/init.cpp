@@ -77,7 +77,7 @@ SCENARIO("Sort", "[s]") {
 		system("pause");
 	}
 	
-	for (size_t i = 0; i < 5; i++) {
+	for (size_t i = 0; i < 500; i++) {
 		size_t person1_i = rand() % n_persons;
 		size_t person2_i = person1_i + rand() % (n_persons - person1_i);
                 REQUIRE(person1_i <= person2_i);
