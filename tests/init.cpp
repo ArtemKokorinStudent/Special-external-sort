@@ -64,8 +64,8 @@ SCENARIO("Sort", "[s]") {
 		russian_letters[i] = str[0];
 	}
 	ru.close();
-	size_t n_persons = 2001;
-	size_t RAM_amount = 10000;
+	size_t n_persons = 20000;
+	size_t RAM_amount = 1;
 	std::string names_file_name = "Names";
 	std::string surnames_file_name = "Surnames";
 	std::string database_file_name = "database.txt";
