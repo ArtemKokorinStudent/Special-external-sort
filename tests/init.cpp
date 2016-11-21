@@ -13,7 +13,7 @@ person readPerson(std::string file_name, size_t index) {
 	file.close();
 	return result;
 }
-bool isALessThanB(char A, char B, bool is_capital) {
+/*bool isALessThanB(char A, char B, bool is_capital) {
 	std::string alphabet;
 	if (is_capital) {
 		alphabet = " АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
@@ -32,12 +32,12 @@ bool isALessThanB(char A, char B, bool is_capital) {
 		}
 	}
 	return A_i < B_i;
-}
+}*/
 bool isANotMoreThanB(person A, person B) {
 	for (size_t i = 0; i < A.surname.length(); i++) {
 		char A_char = A.surname[i];
 		char B_char = (i < B.surname.length()) ? B.surname[i] : ' ';
-		if (isALessThanB(A.surname[i], B.surname[i], i == 0)) {
+		if (letterI(A.surname[i], i == 0) < letterI(B.surname[i], i == 0)) {
 			return true;
 		}
 		else {
