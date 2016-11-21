@@ -51,7 +51,7 @@ bool isANotMoreThanB(person A, person B) {
 
 SCENARIO("Sort", "[s]") {
 	//setlocale(LC_ALL, "ru_RU.utf8");
-	std::ifstream ru(russian_letters.txt");
+	std::ifstream ru("russian_letters.txt");
 	for (size_t i = 0; i < 6; i++) {
 		std::string str;
 		ru >> str;
