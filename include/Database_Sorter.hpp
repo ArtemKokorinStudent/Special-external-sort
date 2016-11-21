@@ -81,7 +81,7 @@ public:
 		: database_file_name(database_file_name),
 		database_file(database_file_name),
 		output_file(output_file_name),
-		RAM_amount(_RAM_amount),
+		RAM_amount(_RAM_amount * 1024 * 1024),
 		is_database_empty(true)
 	{
 		vault_file_name = "F:\\1\\temp_files\\";
