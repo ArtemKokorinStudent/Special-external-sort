@@ -124,9 +124,14 @@ private:
 			std::vector<Persons_File> persons_files = stuffPersonsToFiles(file, file_name, sort_i);
 			for (size_t i = 0; i < persons_files.size(); i++) {
 				if (persons_files[i].file_size != 0) {
+					if (file_size == persons_files[i].file_size){
+						outputFile(file);
+					} else{
+						
 					std::ifstream temp_file(persons_files[i].file_name);
 					sortFile(temp_file, persons_files[i].file_name, persons_files[i].file_size, sort_i + 1);
 					temp_file.close();
+					}
 				}
 			}
 		}
