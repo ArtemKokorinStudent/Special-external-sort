@@ -109,6 +109,13 @@ public:
 		output_file.close();
 	}
 private:
+	void outputFile(std::ifstream & file) {
+		while(!file.eof()){
+			person _person;
+			file >> _person;
+			output_file << _person;
+		}
+	}
 	void sortFile(std::ifstream & file, std::string file_name, size_t file_size, size_t sort_i) {
 		if (file_size < RAM_amount) {
 			RAMsort(file, sort_i);
