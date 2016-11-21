@@ -73,7 +73,7 @@ SCENARIO("Sort", "[s]") {
 		system("pause");
 	}
 	
-	for (size_t i = 0; i < 0; i++) {
+	for (size_t i = 0; i < 100; i++) {
 		size_t person1_i = rand() % n_persons;
 		size_t person2_i = person1_i + rand() % (n_persons - person1_i);
 		person person1 = readPerson(output_file_name, person1_i);
