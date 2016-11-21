@@ -47,7 +47,9 @@ bool isANotMoreThanB(person A, person B) {
 	}
 	return true;
 }
-
+SCENARIO("LetterI", "[l]") {
+   REQUIRE(letterI('A', true) == 1);
+}
 SCENARIO("Sort", "[s]") {
 	//setlocale(LC_ALL, "ru_RU.utf8");
 	std::ifstream ru("russian_letters.txt");
