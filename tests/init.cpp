@@ -49,7 +49,7 @@ bool isANotMoreThanB(person A, person B) {
 }
 SCENARIO("LetterI", "[l]") {
    REQUIRE(letterI('A', true) == 1);
-   REQUIRE(letterI('d', false) == 5);
+   REQUIRE(letterI('d', false) == 4);
 }
 SCENARIO("Sort", "[s]") {
 	//setlocale(LC_ALL, "ru_RU.utf8");
