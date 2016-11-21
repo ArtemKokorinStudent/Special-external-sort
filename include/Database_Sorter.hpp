@@ -17,6 +17,20 @@ size_t russianLetterI(const char letter, const bool is_capital) {
 		return result;
 	}
 }
+size_t russianLetterI2(const char letter, const bool is_capital) {
+	int first_letter_code = static_cast<int>(is_capital ? russian_letters[0] : russian_letters[1]);
+	if (letter > (is_capital ? russian_letters[2] : russian_letters[3])) {
+		size_t result = static_cast<int>(letter) - first_letter_code + 2;
+		return result;
+	}
+	else {
+		if (letter == (is_capital ? russian_letters[4] : russian_letters[5])) {
+			return 7;
+		}
+		size_t result = static_cast<int>(letter) - first_letter_code + 2;
+		return result;
+	}
+}
 size_t letterI(const char letter, const bool is_capital) {
         int first_letter_code = static_cast<int>(is_capital ? 'A' : 'a');
 	size_t result = static_cast<int>(letter) - first_letter_code + 1;
