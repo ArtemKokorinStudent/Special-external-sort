@@ -58,7 +58,7 @@ SCENARIO("Sort", "[s]") {
 		russian_letters[i] = str[0];
 	}
 	ru.close();
-	/*size_t n_persons = 2001;
+	size_t n_persons = 2001;
 	size_t RAM_amount = 10000;
 	std::string names_file_name = "names.txt";
 	std::string surnames_file_name = "surnames.txt";
@@ -66,7 +66,7 @@ SCENARIO("Sort", "[s]") {
 	std::string output_file_name = "sorted_database.txt";
 	{
 		Database_Creator database_creator(database_file_name, names_file_name, surnames_file_name, n_persons);
-		Database_Sorter database_sorter(database_file_name, output_file_name, RAM_amount);
+		/*Database_Sorter database_sorter(database_file_name, output_file_name, RAM_amount);
 		size_t start = clock();
 		database_sorter.sortDatabase();
 		size_t result = clock() - start;
