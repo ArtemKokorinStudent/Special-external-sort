@@ -2,16 +2,19 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+char russian_letters[6];
 size_t letterI(const char letter, const bool is_capital) {
-	int first_letter_code = static_cast<int>(is_capital ? L'А' : L'а');
-	if (letter > (is_capital ? L'Е' : L'е')) {
-		return static_cast<int>(letter) - first_letter_code + 2;
+	int first_letter_code = static_cast<int>(is_capital ? russian_letters[0] : russian_letters[1]);
+	if (letter > (is_capital ? russian_letters[2] : russian_letters[3])) {
+		size_t result = static_cast<int>(letter) - first_letter_code + 2;
+		return result;
 	}
 	else {
-		if (letter == (is_capital ? L'Ё' : L'ё')) {
+		if (letter == (is_capital ? russian_letters[4] : russian_letters[5])) {
 			return 7;
 		}
-		return static_cast<int>(letter) - first_letter_code + 1;
+		size_t result = static_cast<int>(letter) - first_letter_code + 2;
+		return result;
 	}
 }
 struct person {
@@ -90,20 +93,14 @@ public:
 private:
 	void sortFile(std::ifstream & file, std::string file_name, size_t file_size, size_t sort_i) {
 		if (file_size < RAM_amount) {
-			
+			RAMsort(file, sort_i);
 		}
 		else {
 			std::vector<Persons_File> persons_files = stuffPersonsToFiles(file, file_name, sort_i);
 			for (size_t i = 0; i < persons_files.size(); i++) {
 				if (persons_files[i].file_size != 0) {
 					std::ifstream temp_file(persons_files[i].file_name);
-					try {
-						sortFile(temp_file, persons_files[i].file_name, persons_files[i].file_size, sort_i + 1);
-					}
-					catch (...) {
-						system("pause");
-						throw;
-					}
+					sortFile(temp_file, persons_files[i].file_name, persons_files[i].file_size, sort_i + 1);
 					temp_file.close();
 				}
 			}
