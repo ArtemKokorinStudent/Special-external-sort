@@ -73,6 +73,7 @@ SCENARIO("Sort", "[s]") {
 		std::cout << result << std::endl;
 		system("pause");
 	}
+	
 	for (size_t i = 0; i < 0; i++) {
 		size_t person1_i = rand() % n_persons;
 		size_t person2_i = person1_i + rand() % (n_persons - person1_i);
@@ -80,4 +81,7 @@ SCENARIO("Sort", "[s]") {
 		person person2 = readPerson(output_file_name, person2_i);
 		REQUIRE(isANotMoreThanB(person1, person2));
 	}
+	
+	std::string str = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+	REQUIRE(letterI(str[0], true) == 1);
 }
