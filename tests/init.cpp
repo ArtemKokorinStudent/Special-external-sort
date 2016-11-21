@@ -68,7 +68,7 @@ SCENARIO("Sort", "[s]") {
 		Database_Creator database_creator(database_file_name, names_file_name, surnames_file_name, n_persons);
 		Database_Sorter database_sorter(database_file_name, output_file_name, RAM_amount);
 		size_t start = clock();
-		//database_sorter.sortDatabase();
+		database_sorter.sortDatabase();
 		size_t result = clock() - start;
 		std::cout << result << std::endl;
 		system("pause");
@@ -82,9 +82,9 @@ SCENARIO("Sort", "[s]") {
 		REQUIRE(isANotMoreThanB(person1, person2));
 	}
 	
-	std::string str = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+	/*std::string str = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
 	REQUIRE(letterI(str[1], true) == 2);
 	REQUIRE(letterI(str[2], true) == 3);
 	REQUIRE(letterI(str[3], true) == 4);
-	REQUIRE(letterI(str[4], true) == 5);
+	REQUIRE(letterI(str[4], true) == 5);*/
 }
