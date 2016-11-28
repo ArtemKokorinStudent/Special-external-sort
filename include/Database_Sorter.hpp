@@ -50,7 +50,7 @@ private:
 		}
 		file.close();
 	}
-	void sortFile(std::string const & file_name, size_t file_size, size_t sort_i) {
+	void sortFile(std::string const & file_name, size_t const file_size, size_t const sort_i) {
 		if (file_size < RAM_amount) {
 			RAMsort(file_name, sort_i);
 		}
