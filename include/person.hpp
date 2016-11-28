@@ -17,7 +17,7 @@ struct person {
         }
         person(person const & _person) {
                str = _person.str;
-               name = _person.str;
+               name_i = _person.name_i;
                name_length = _person.name_length;
         }
         person(person && _person) : str(_person.str), name_i(_person.name_i), name_length(_person.name_length) {
