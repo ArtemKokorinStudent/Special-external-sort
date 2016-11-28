@@ -136,8 +136,10 @@ private:
 		Buckets buckets(n_literals);
 		for (auto person : persons) {
 			size_t currentI = person.i(sort_i);
-			full_bucket_i = currentI;
-			buckets[currentI].push_back(std::move(person));
+			//full_bucket_i = currentI;
+			
+			buckets[currentI].push_back(person());
+			std::swap(buckets[currentI], person);
 			if (is_same) {
 				if (full_bucket_i != currentI) {
 					is_same = false;
