@@ -189,10 +189,11 @@ private:
 			}
 			else {
 				if (files[currentTargetFileI].is_same) {
-					//char * temp = current_person.getName();
-					if (strcmp(files[currentTargetFileI].key, str2.c_str()) != 0) { //B
+					char * temp = current_person.getName();
+					if (strcmp(files[currentTargetFileI].key, temp) != 0) { //B
 						files[currentTargetFileI].is_same = false;
 					}
+                                        delete []temp;
 				}
 				files[currentTargetFileI].stream << std::endl;
 			}
