@@ -52,7 +52,5 @@ std::ostream & operator<<(std::ostream & output, person const & _person)
 std::istream & operator>>(std::istream & input, person & _person)
 {
 	input >> _person.str;
-	/*input >> _person.name;
-	input >> _person.year;*/
 	return input;
 }
