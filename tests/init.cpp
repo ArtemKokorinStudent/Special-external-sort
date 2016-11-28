@@ -3,7 +3,7 @@
 //#include "Database_Creator.hpp"
 #include "Database_Sorter.hpp"
 
-person readPerson(std::string file_name, size_t index) {
+person readPerson(std::string const & file_name, size_t const index) {
 	person result;
 	std::ifstream file(file_name);
 	for (size_t i = 0; i < index + 1; i++) {
