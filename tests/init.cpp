@@ -42,9 +42,9 @@ SCENARIO("Sort", "[s]") {
 	std::string output_file_name = "F:\\1\\sorted_database.txt";
 
 	//Database_Creator database_creator(database_file_name, names_file_name, surnames_file_name, n_persons);
-	Database_Sorter database_sorter1("8.txt", "1", 1);
-        Database_Sorter database_sorter2("16.txt", "2", 4);
-        Database_Sorter database_sorter3("16.txt", "3", 17);
+	Database_Sorter database_sorter1("8.txt", "1", 1, "1\\");
+        Database_Sorter database_sorter2("16.txt", "2", 4, "2\\");
+        Database_Sorter database_sorter3("16.txt", "3", 17, "3\\");
 	size_t start = clock();
 	database_sorter1.sortDatabase();
 	database_sorter2.sortDatabase();
