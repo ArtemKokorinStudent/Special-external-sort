@@ -12,12 +12,15 @@ struct person {
         person() : str(nullptr) {
                ;
         }
-        person(person && _person) {
-               std::swap(str, _person.str);
-               std::swap(name_i, _person.name_i);
-               std::swap(name_length, _person.name_length);
+        person(person && _person) : str(_person.str), name_i(_person.name_i), name_length(_person.name_length) {
+               _person.str = nullptr;
         }
-        person && operator=(
+        person && operator=(person && _person) {
+	       if (this != &_person) {
+		        (shared_pointer<T>(std::move(_person))).swap(*this);
+	       }
+	       return *this;
+        }
 	size_t i(size_t sort_i) const {
 		if (sort_i < name_length) {
 			return letterI(str[name_i + sort_i], sort_i == 0);
