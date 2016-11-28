@@ -26,9 +26,11 @@ struct person {
         }
         person & operator=(person && _person) {
 	       if (this != &_person) {
-		        std::swap(person(std::move(_person)), *this);
+                        std::swap(str, _person.str);
+                        std::swap(name_i, _person.name_i);
+                        std::swap(name_length, _person.name_length);
 	       }
-	       return *this;
+	       return *this; //?
         }
 	size_t i(size_t sort_i) const {
 		if (sort_i < name_length) {
