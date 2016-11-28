@@ -139,7 +139,7 @@ private:
 			//full_bucket_i = currentI;
 			
 			buckets[currentI].push_back(person());
-			std::swap(buckets[currentI], person);
+			std::swap(buckets[currentI][buckets[currentI].size() - 1], person);
 			if (is_same) {
 				if (full_bucket_i != currentI) {
 					is_same = false;
