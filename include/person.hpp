@@ -57,11 +57,18 @@ struct person {
 };
 std::ostream & operator<<(std::ostream & output, person const & _person)
 {
+        
 	output << _person.str << " ";
 	return output;
 }
 std::istream & operator>>(std::istream & input, person & _person)
 {
+        base_file >> str1;
+	.name_i = str1.length() + 1;
+	base_file >> str2;
+	current_person.name_length = str2.length();
+	base_file >> str3;
+        current_person.putStr(str1 + " " + str2 + " " + str3);
 	input >> _person.str;
 	return input;
 }
