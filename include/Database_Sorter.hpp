@@ -132,9 +132,6 @@ private:
 	}
 	Buckets stuffPersonsToBuckets(Persons & persons, size_t const sort_i, size_t & full_bucket_i) {
 		bool is_same = true;
-		/*char * key = new char[persons[0].name_length + 1];
-		strncpy(key, persons[0].getName(), persons[0].name_length);
-		key[persons[0].name_length] = '\0';*/
 		
 		full_bucket_i = persons[0].i(sort_i);
 		size_t persons_size = persons.size();
@@ -154,7 +151,7 @@ private:
 		if (!is_same) {
 			full_bucket_i = std::numeric_limits<size_t>::max();
 		}
-		//delete[] key;
+		
 		return buckets;
 	}
 	void outputBucket(Persons const & bucket, std::ofstream & sorted_persons_file) {
@@ -192,9 +189,7 @@ private:
 			if (files[currentTargetFileI].is_empty) {
 				files[currentTargetFileI].openNew(calcDerivedFileName(base_file_name, currentTargetFileI));
 				files[currentTargetFileI].is_empty = false;
-				files[currentTargetFileI].key = new char[current_person.name_length + 1];
-				strncpy(files[currentTargetFileI].key, current_person.str, current_person.name_length);
-				files[currentTargetFileI].key[current_person.name_length] = '\0';
+				files[currentTargetFileI].key = current_person.getName();
 				files[currentTargetFileI].is_same = true;
 			}
 			else {
