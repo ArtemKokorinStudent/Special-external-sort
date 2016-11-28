@@ -1,6 +1,7 @@
 #include <string>
 #include <cstring>
 #include <utility>
+#include <algorithm>
 
 const size_t n_literals = 27;
 size_t letterI(const char letter, const bool is_capital) {
