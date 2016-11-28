@@ -29,10 +29,10 @@ public:
 		database_file.seekg(0, std::ios::end);
 		size_t database_size = static_cast<size_t>(database_file.tellg());
 		database_file.seekg(0, std::ios::beg);
+                database_file.close();
 		sortFile(database_file_name, database_size, 0);
 	}
 	void closeDatabase() {
-		database_file.close();
 		output_file.close();
 	}
 private:
