@@ -2,7 +2,7 @@
 #include <cstring>
 #include <utility>
 #include <algorithm>
-
+std::unordered_set<std::string> set;
 const size_t n_literals = 27;
 size_t letterI(const char letter, const bool is_capital) {
 	int first_letter_code = static_cast<int>(is_capital ? 'A' : 'a');
@@ -31,6 +31,7 @@ struct person {
 	       return *this; //?
         }
 	size_t i(size_t sort_i) const {
+		
 		if (sort_i < name_length) {
 			return letterI(str[name_i + sort_i], sort_i == 0);
 		}
