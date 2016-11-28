@@ -23,7 +23,7 @@ struct person {
         person(person && _person) : str(_person.str), name_i(_person.name_i), name_length(_person.name_length) {
                _person.str = nullptr;
         }
-        person && operator=(person && _person) {
+        person & operator=(person && _person) {
 	       if (this != &_person) {
 		        (person(std::move(_person))).swap(*this);
 	       }
