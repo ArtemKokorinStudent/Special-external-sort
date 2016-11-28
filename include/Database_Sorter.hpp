@@ -218,20 +218,6 @@ private:
 		base_file.close();
 		return files;
 	}
-	std::vector<Persons_File> createDerivedFiles(std::string const & base_file_name) {
-		std::vector<Persons_File> files(n_literals);
-		for (size_t i = 0; i < files.size(); i++) {
-			std::string str;
-			if (base_file_name == database_file_name) {
-				str = vault_name + static_cast<char>(i + 64) + ".txt";
-			}
-			else {
-				str = base_file_name + static_cast<char>(i + 64) + ".txt";
-			}
-			files[i].openNew(str);
-		}
-		return files;
-	}
 	std::string calcDerivedFileName(const std::string & base_file_name, size_t file_i) {
 		std::string derived_file_name;
 		if (base_file_name == database_file_name) {
