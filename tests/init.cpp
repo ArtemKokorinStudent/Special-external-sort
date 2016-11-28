@@ -1,6 +1,6 @@
 #include "catch.hpp"
 #include <iostream>
-#include "Database_Creator.hpp"
+//#include "Database_Creator.hpp"
 #include "Database_Sorter.hpp"
 
 person readPerson(std::string file_name, size_t index) {
@@ -12,83 +12,44 @@ person readPerson(std::string file_name, size_t index) {
 	file.close();
 	return result;
 }
-/*bool isALessThanB(char A, char B, bool is_capital) {
-	std::string alphabet;
-	if (is_capital) {
-		alphabet = " АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
-	}
-	else {
-		alphabet = " абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-	}
-	size_t A_i;
-	size_t B_i;
-	for (size_t i = 0; i < alphabet.size(); i++) {
-		if (alphabet[i] == A) {
-			A_i = i;
-		}
-		if (alphabet[i] == B) {
-			B_i = i;
-		}
-	}
-	return A_i < B_i;
-}*/
-bool isANotMoreThanB(person A, person B) {
-	for (size_t i = 0; i < A.surname.length(); i++) {
-		char A_char = A.surname[i];
-		char B_char = (i < B.surname.length()) ? B.surname[i] : ' ';
-		if (letterI(A.surname[i], i == 0) < letterI(B.surname[i], i == 0)) {
+/*bool isANotMoreThanB(person A, person B) {
+	for (size_t i = 0; i < A.name.length(); i++) {
+		char A_char = A.name[i];
+		char B_char = (i < B.name.length()) ? B.name[i] : ' ';
+		if (letterI(A.name[i], i == 0) < letterI(B.name[i], i == 0)) {
 			return true;
 		}
 		else {
-			if (A.surname[i] != B.surname[i]) {
-                                REQUIRE(A.surname == B.surname);
+			if (A.name[i] != B.name[i]) {
 				return false;
 			}
 		}
 	}
 	return true;
-}
-SCENARIO("LetterI", "[l]") {
-   REQUIRE(letterI('A', true) == 1);
-   REQUIRE(letterI('d', false) == 4);
-}
+}*/
+
 SCENARIO("Sort", "[s]") {
-	//setlocale(LC_ALL, "ru_RU.utf8");
-	std::ifstream ru("russian_letters.txt");
-	for (size_t i = 0; i < 6; i++) {
-		std::string str;
-		ru >> str;
-		russian_letters[i] = str[0];
-	}
-	ru.close();
-	size_t n_persons = 20000;
+	size_t n_persons = 200;
+	//system("start www.cyberforum.ru/cpp-beginners/thread82643.html#post458604");
 	size_t RAM_amount = 1;
-	std::string names_file_name = "Names";
-	std::string surnames_file_name = "Surnames";
-	std::string database_file_name = "database.txt";
-	std::string output_file_name = "sorted_database.txt";
-	{
-		Database_Creator database_creator(database_file_name, names_file_name, surnames_file_name, n_persons);
-		Database_Sorter database_sorter(database_file_name, output_file_name, RAM_amount);
-		size_t start = clock();
-		database_sorter.sortDatabase();
-		size_t result = clock() - start;
-		std::cout << result << std::endl;
-		system("pause");
-	}
-	
-	for (size_t i = 0; i < 500; i++) {
+	std::string names_file_name = "F:\\1\\names.txt";
+	std::string surnames_file_name = "F:\\1\\surnames.txt";
+	std::string database_file_name = "F:\\1\\database.txt";
+	std::string output_file_name = "F:\\1\\sorted_database.txt";
+
+	//Database_Creator database_creator(database_file_name, names_file_name, surnames_file_name, n_persons);
+	Database_Sorter database_sorter(database_file_name, output_file_name, RAM_amount);
+	size_t start = clock();
+	database_sorter.sortDatabase();
+	size_t result = clock() - start;
+	database_sorter.closeDatabase();
+	std::cout << result << std::endl;
+
+	for (size_t i = 0; i < 0; i++) {
 		size_t person1_i = rand() % n_persons;
 		size_t person2_i = person1_i + rand() % (n_persons - person1_i);
-                REQUIRE(person1_i <= person2_i);
 		person person1 = readPerson(output_file_name, person1_i);
 		person person2 = readPerson(output_file_name, person2_i);
-		REQUIRE(isANotMoreThanB(person1, person2));
+		//REQUIRE(isANotMoreThanB(person1, person2));
 	}
-	
-	/*std::string str = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
-	REQUIRE(letterI(str[1], true) == 2);
-	REQUIRE(letterI(str[2], true) == 3);
-	REQUIRE(letterI(str[3], true) == 4);
-	REQUIRE(letterI(str[4], true) == 5);*/
 }
