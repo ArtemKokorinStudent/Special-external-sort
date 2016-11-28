@@ -16,7 +16,6 @@ public:
 	Database_Sorter(std::string database_file_name, std::string output_file_name, size_t _RAM_amount, 
 		std::string _vault_name = "F:\\1\\temp_files\\")
 		: database_file_name(database_file_name),
-		//database_file(database_file_name),
 		output_file(output_file_name),
 		RAM_amount(_RAM_amount * 1024 * 1024),
 		is_database_empty(true),
