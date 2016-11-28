@@ -38,7 +38,7 @@ SCENARIO("Sort", "[s]") {
 	size_t RAM_amount = 1;
 	std::string names_file_name = "F:\\1\\names.txt";
 	std::string surnames_file_name = "F:\\1\\surnames.txt";
-	std::string database_file_name = "F:\\1\\8.txt";
+	std::string database_file_name = "8.txt";
 	std::string output_file_name = "F:\\1\\sorted_database.txt";
 
 	//Database_Creator database_creator(database_file_name, names_file_name, surnames_file_name, n_persons);
