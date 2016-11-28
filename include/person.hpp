@@ -26,7 +26,7 @@ struct person {
         }
         person & operator=(person && _person) {
 	       if (this != &_person) {
-		        (person(std::move(_person))).swap(*this);
+		        std::swap(person(std::move(_person)), *this);
 	       }
 	       return *this;
         }
