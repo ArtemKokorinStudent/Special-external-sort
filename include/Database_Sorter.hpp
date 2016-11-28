@@ -137,8 +137,8 @@ private:
 		for (auto person : persons) {
 			size_t currentI = person.i(sort_i);
 			//full_bucket_i = currentI;
-			
-			buckets[currentI].push_back(person());
+			person person0;
+			buckets[currentI].push_back(person0);
 			std::swap(buckets[currentI][buckets[currentI].size() - 1], person);
 			if (is_same) {
 				if (full_bucket_i != currentI) {
