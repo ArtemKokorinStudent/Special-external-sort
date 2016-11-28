@@ -17,7 +17,7 @@ struct person {
         }
         person && operator=(person && _person) {
 	       if (this != &_person) {
-		        (shared_pointer<T>(std::move(_person))).swap(*this);
+		        (person(std::move(_person))).swap(*this);
 	       }
 	       return *this;
         }
