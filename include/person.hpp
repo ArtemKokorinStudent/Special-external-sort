@@ -57,7 +57,6 @@ struct person {
 };
 std::ostream & operator<<(std::ostream & output, person const & _person)
 {
-        
 	output << _person.str << " ";
 	return output;
 }
