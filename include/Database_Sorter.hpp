@@ -16,7 +16,7 @@ public:
 	Database_Sorter(std::string database_file_name, std::string output_file_name, size_t _RAM_amount, 
 		std::string _vault_name = "F:\\1\\temp_files\\")
 		: database_file_name(database_file_name),
-		database_file(database_file_name),
+		//database_file(database_file_name),
 		output_file(output_file_name),
 		RAM_amount(_RAM_amount * 1024 * 1024),
 		is_database_empty(true),
@@ -25,6 +25,7 @@ public:
 		;
 	}
 	void sortDatabase() {
+                std::fstream database_file(database_file_name);
 		database_file.seekg(0, std::ios::end);
 		size_t database_size = static_cast<size_t>(database_file.tellg());
 		database_file.seekg(0, std::ios::beg);
@@ -74,19 +75,6 @@ private:
 		sortPersons(persons, sort_i);
 	}
 	void readFileIntoRAM(std::string const & file_name) {
-		/*std::string str;
-
-		std::ifstream file(file_name, std::ios::in | std::ios::ate);
-		if (file) {
-			std::ifstream::streampos filesize = file.tellg();
-			str.reserve(filesize);
-
-			file.seekg(0);
-			while (!file.eof())
-			{
-				str += file.get();
-			}
-		}*/
 		std::ifstream is(file_name, std::ifstream::binary);
 		if (is) {
 			// get length of file:
@@ -127,16 +115,6 @@ private:
 			persons.shrink_to_fit();
 			delete[] buffer;
 		}
-		/*std::ifstream file(file_name);
-		std::stringstream s;
-		
-		person current_person;
-		while (!file.eof()) {
-			file >> current_person;
-			current_person.name.shrink_to_fit();
-			current_person.surname.shrink_to_fit();
-			persons.push_back(current_person);
-		}*/
 	}
 	void sortPersons(Persons & entered_persons, size_t sort_i) {
 		size_t full_bucket_i;
@@ -268,7 +246,7 @@ private:
 	}
 
 	std::vector<person> persons;
-	std::ifstream database_file;
+	//std::ifstream database_file;
 	std::ofstream output_file;
 	const size_t RAM_amount;
 };
