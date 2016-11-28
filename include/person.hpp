@@ -12,6 +12,12 @@ struct person {
         person() : str(nullptr) {
                ;
         }
+        person(person && _person) {
+               std::swap(str, _person.str);
+               std::swap(name_i, _person.name_i);
+               std::swap(name_length, _person.name_length);
+        }
+        person && operator=(
 	size_t i(size_t sort_i) const {
 		if (sort_i < name_length) {
 			return letterI(str[name_i + sort_i], sort_i == 0);
