@@ -6,11 +6,11 @@ size_t letterI(const char letter, const bool is_capital) {
 }
 struct person {
 	char * str;
-	/*std::string surname;
-	std::string name;
-	std::string year;*/
 	unsigned char name_i;
 	unsigned char name_length;
+        person() : str(nullptr) {
+               ;
+        }
 	size_t i(size_t sort_i) const {
 		if (sort_i < name_length) {
 			return letterI(str[name_i + sort_i], sort_i == 0);
@@ -20,6 +20,7 @@ struct person {
 		}
 	}
 	char * getName() {
+
 		char * temp = new char[name_length + 1];
 		strncpy(temp, &(str[name_i]), name_length);
 		temp[name_length] = '\0';
@@ -32,8 +33,6 @@ struct person {
 std::ostream & operator<<(std::ostream & output, person const & _person)
 {
 	output << _person.str << " ";
-	/*output << _person.name << " ";
-	output << _person.year;*/
 	return output;
 }
 std::istream & operator>>(std::istream & input, person & _person)
