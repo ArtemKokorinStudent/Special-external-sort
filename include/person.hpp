@@ -2,8 +2,8 @@
 #include <cstring>
 #include <utility>
 #include <algorithm>
-#include <unordered_set>
-std::unordered_set<std::string> set;
+#include <unordered_map>
+std::unordered_map<std::string, size_t> map;
 const size_t n_literals = 27;
 size_t letterI(const char letter, const bool is_capital) {
 	int first_letter_code = static_cast<int>(is_capital ? 'A' : 'a');
@@ -32,7 +32,11 @@ struct person {
 	       return *this; //?
         }
 	size_t i(size_t sort_i) const {
-		
+		/*if (map.find(str) == end()){
+			map.insert(str, map.size());	
+		} else{
+			map.find(str).	
+		}*/
 		if (sort_i < name_length) {
 			return letterI(str[name_i + sort_i], sort_i == 0);
 		}
