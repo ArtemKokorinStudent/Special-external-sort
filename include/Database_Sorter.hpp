@@ -132,9 +132,9 @@ private:
 	}
 	Buckets stuffPersonsToBuckets(Persons & persons, size_t sort_i, size_t & full_bucket_i) {
 		bool is_same = true;
-		char * key = new char[persons[0].name_length + 1];
+		/*char * key = new char[persons[0].name_length + 1];
 		strncpy(key, persons[0].getName(), persons[0].name_length);
-		key[persons[0].name_length] = '\0';
+		key[persons[0].name_length] = '\0';*/
 		
 		full_bucket_i = persons[0].i(sort_i);
 		size_t persons_size = persons.size();
@@ -144,7 +144,7 @@ private:
 			full_bucket_i = currentI;
 			buckets[currentI].push_back(std::move(person));
 			if (is_same) {
-				if (strcmp(key, person.getName()) != 0) {
+				if (key != currentI) {
 					is_same = false;
 				}
 			}
@@ -154,7 +154,7 @@ private:
 		if (!is_same) {
 			full_bucket_i = std::numeric_limits<size_t>::max();
 		}
-		delete[] key;
+		//delete[] key;
 		return buckets;
 	}
 	void outputBucket(Persons const & bucket, std::ofstream & sorted_persons_file) {
@@ -162,7 +162,7 @@ private:
 			outputPerson(person);
 		}
 	}
-	void outputPerson(person _person) {
+	void outputPerson(person const & _person) {
 		if (is_database_empty) {
 			is_database_empty = false;
 		}
@@ -172,7 +172,7 @@ private:
 		output_file << _person.str;
 	}
 
-	std::vector<Persons_File> stuffPersonsToFiles(/*std::ifstream & base_file, */
+	std::vector<Persons_File> stuffPersonsToFiles(
 		std::string base_file_name, size_t sort_i) {
 		std::ifstream base_file(base_file_name);
 		bool is_same = true;
