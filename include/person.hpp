@@ -1,3 +1,4 @@
+#include <string>
 const size_t n_literals = 27;
 size_t letterI(const char letter, const bool is_capital) {
 	int first_letter_code = static_cast<int>(is_capital ? 'A' : 'a');
@@ -25,10 +26,10 @@ struct person {
 		temp[name_length] = '\0';
 		return temp;
 	} //Boost
-        void putStr(char * _str, size_t significant_length) {
-                str = new char[significant_length + 1];
-		strncpy(str, _str, significant_length);
-		str[significant_length] = '\0';
+        void putStr(std::string const & _str) {
+                str = new char[_str.length() + 1];
+		strncpy(str, _str, _str.length());
+		str[_str.length()] = '\0';
         }
 	~person() {
 		delete[] str;
