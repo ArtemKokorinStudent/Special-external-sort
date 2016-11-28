@@ -58,8 +58,8 @@ SCENARIO("Sort", "[s]") {
 	for (size_t i = 0; i < 100; i++) {
 		size_t person1_i = rand() % n_persons;
 		size_t person2_i = person1_i + rand() % (n_persons - person1_i);
-		person person1 = readPerson("1.txt", person1_i);
-		person person2 = readPerson("1.txt", person2_i);
+		person person1 = readPerson("3.txt", person1_i);
+		person person2 = readPerson("3.txt", person2_i);
 		REQUIRE(isANotMoreThanB(person1, person2));
 	}
 }
