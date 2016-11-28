@@ -63,12 +63,13 @@ std::ostream & operator<<(std::ostream & output, person const & _person)
 }
 std::istream & operator>>(std::istream & input, person & _person)
 {
-        base_file >> str1;
-	.name_i = str1.length() + 1;
-	base_file >> str2;
-	current_person.name_length = str2.length();
-	base_file >> str3;
-        current_person.putStr(str1 + " " + str2 + " " + str3);
-	input >> _person.str;
+	std::string str1, str2, str3;
+        input >> str1;
+	_person.name_i = str1.length() + 1;
+	input >> str2;
+	_person.name_length = str2.length();
+	input >> str3;
+        _person.putStr(str1 + " " + str2 + " " + str3);
+	
 	return input;
 }
