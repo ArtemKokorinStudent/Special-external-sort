@@ -12,7 +12,7 @@ person readPerson(std::string const & file_name, size_t const index) {
 	file.close();
 	return result;
 }
-bool isANotMoreThanB(person A, person B) {
+bool isANotMoreThanB(person const & A, person const & B) {
         char * A_name = A.getName();
         char * B_name = B.getName();
 	for (size_t i = 0; i < A.name_length; i++) {
