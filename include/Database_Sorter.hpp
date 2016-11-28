@@ -134,12 +134,12 @@ private:
 		full_bucket_i = persons[0].i(sort_i);
 		size_t persons_size = persons.size();
 		Buckets buckets(n_literals);
-		for (auto person : persons) {
-			size_t currentI = person.i(sort_i);
+		for (auto person_el : persons) {
+			size_t currentI = person_el.i(sort_i);
 			//full_bucket_i = currentI;
 			person person0;
 			buckets[currentI].push_back(person0);
-			std::swap(buckets[currentI][buckets[currentI].size() - 1], person);
+			std::swap(buckets[currentI][buckets[currentI].size() - 1], person_el);
 			if (is_same) {
 				if (full_bucket_i != currentI) {
 					is_same = false;
