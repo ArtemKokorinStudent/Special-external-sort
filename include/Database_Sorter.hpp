@@ -17,7 +17,7 @@ public:
 		std::string _vault_name = "F:\\1\\temp_files\\")
 		: database_file_name(database_file_name),
 		output_file(output_file_name),
-		RAM_amount(_RAM_amount * 1024 * 1024),
+		RAM_amount(_RAM_amount * 1024 * 512),
 		is_database_empty(true),
 		vault_name(_vault_name)
 	{
