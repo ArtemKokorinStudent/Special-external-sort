@@ -47,7 +47,7 @@ SCENARIO("Sort", "[s]") {
 	database_sorter.sortDatabase();
 	size_t result = clock() - start;
 	database_sorter.closeDatabase();
-	std::cout << result << std::endl;
+	std::cout << "Result " << result << std::endl;
 
 	for (size_t i = 0; i < 100; i++) {
 		size_t person1_i = rand() % n_persons;
