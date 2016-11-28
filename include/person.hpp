@@ -2,6 +2,7 @@
 #include <cstring>
 #include <utility>
 #include <algorithm>
+#include <unordered_set>
 std::unordered_set<std::string> set;
 const size_t n_literals = 27;
 size_t letterI(const char letter, const bool is_capital) {
