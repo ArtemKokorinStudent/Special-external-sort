@@ -69,7 +69,7 @@ private:
 		}
 	}
 	
-	void RAMsort(std::string const & file_name, size_t sort_i) {
+	void RAMsort(std::string const & file_name, size_t const sort_i) {
 		persons.clear();
 		readFileIntoRAM(file_name);
 		sortPersons(persons, sort_i);
@@ -116,7 +116,7 @@ private:
 			delete[] buffer;
 		}
 	}
-	void sortPersons(Persons & entered_persons, size_t sort_i) {
+	void sortPersons(Persons & entered_persons, size_t const sort_i) {
 		size_t full_bucket_i;
 		Buckets buckets = stuffPersonsToBuckets(entered_persons, sort_i, full_bucket_i);
 		if (full_bucket_i != std::numeric_limits<size_t>::max()) {
@@ -130,7 +130,7 @@ private:
 			}
 		}
 	}
-	Buckets stuffPersonsToBuckets(Persons & persons, size_t sort_i, size_t & full_bucket_i) {
+	Buckets stuffPersonsToBuckets(Persons & persons, size_t const sort_i, size_t & full_bucket_i) {
 		bool is_same = true;
 		/*char * key = new char[persons[0].name_length + 1];
 		strncpy(key, persons[0].getName(), persons[0].name_length);
@@ -218,7 +218,7 @@ private:
 		base_file.close();
 		return files;
 	}
-	std::string calcDerivedFileName(const std::string & base_file_name, size_t file_i) {
+	std::string calcDerivedFileName(const std::string & base_file_name, size_t const file_i) {
 		std::string derived_file_name;
 		if (base_file_name == database_file_name) {
 			derived_file_name = vault_name + static_cast<char>(file_i + 64) + ".txt";
