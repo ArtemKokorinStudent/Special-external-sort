@@ -20,12 +20,16 @@ struct person {
 		}
 	}
 	char * getName() {
-
 		char * temp = new char[name_length + 1];
 		strncpy(temp, &(str[name_i]), name_length);
 		temp[name_length] = '\0';
 		return temp;
 	} //Boost
+        void putStr(char * _str, size_t significant_length) {
+                str = new char[significant_length + 1];
+		strncpy(str, _str, significant_length);
+		str[significant_length] = '\0';
+        }
 	~person() {
 		delete[] str;
 	}
