@@ -28,7 +28,7 @@ struct person {
 	} //Boost
         void putStr(std::string const & _str) {
                 str = new char[_str.length() + 1];
-		strncpy(str, _str, _str.length());
+		strncpy(str, _str.c_str(), _str.length());
 		str[_str.length()] = '\0';
         }
 	~person() {
