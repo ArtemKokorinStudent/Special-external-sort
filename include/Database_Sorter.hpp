@@ -1,28 +1,27 @@
-#include <string>
-#include <fstream>
 #include <sstream>
 #include <vector>
 #include <limits>
 #include "person.hpp"
+#include "PersonsFile.hpp"
+
+/*char russian_letters[6];
+size_t russianLetterI(const char letter, const bool is_capital) {
+	int first_letter_code = static_cast<int>(is_capital ? russian_letters[0] : russian_letters[1]);
+	if (letter > (is_capital ? russian_letters[2] : russian_letters[3])) {
+		size_t result = static_cast<int>(letter) - first_letter_code + 2;
+		return result;
+	}
+	else {
+		if (letter == (is_capital ? russian_letters[4] : russian_letters[5])) {
+			return 7;
+		}
+		size_t result = static_cast<int>(letter) - first_letter_code + 2;
+		return result;
+	}
+}*/
 
 using Buckets = std::vector<std::vector<person>>;
 using Persons = std::vector<person>;
-class Persons_File {
-public:
-	Persons_File() : is_empty(true), file_size(0) {
-		;
-	}
-	std::string file_name;
-	size_t file_size;
-	bool is_empty;
-	char * key;
-	bool is_same;
-	std::fstream stream;
-	void openNew(std::string _file_name) {
-		file_name = _file_name;
-		stream.open(file_name, std::ios::out);
-	}
-};
 using Output_Files = std::vector<std::ofstream>;
 
 class Database_Sorter {
