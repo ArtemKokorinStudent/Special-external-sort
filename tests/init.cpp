@@ -15,9 +15,9 @@ person readPerson(std::string file_name, size_t index) {
 bool isANotMoreThanB(person A, person B) {
         char * A_name = A.getName();
         char * B_name = B.getName();
-	for (size_t i = 0; i < A_name.length(); i++) {
+	for (size_t i = 0; i < A.name_length; i++) {
 		char A_char = name[i];
-		char B_char = (i < B_name_length) ? B_name[i] : ' ';
+		char B_char = (i < B.name_length) ? B_name[i] : ' ';
 		if (letterI(A_name[i], i == 0) < letterI(B_name[i], i == 0)) {
 			return true;
 		}
