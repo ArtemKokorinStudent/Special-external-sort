@@ -214,6 +214,7 @@ private:
 		for (size_t i = 0; i < files.size(); i++) {
 			if (!files[i].is_empty) {
 				files[i].file_size = static_cast<size_t>(files[i].stream.tellg());
+                                delete []files[i].key;
 			}
 			files[i].stream.close();
 		}
