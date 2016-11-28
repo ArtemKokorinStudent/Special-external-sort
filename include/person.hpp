@@ -40,7 +40,7 @@ struct person {
 			return 0;
 		}
 	}
-	char * getName() {
+	char * getName() const {
 		char * temp = new char[name_length + 1];
 		strncpy(temp, &(str[name_i]), name_length);
 		temp[name_length] = '\0';
