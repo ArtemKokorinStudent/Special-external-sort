@@ -42,20 +42,24 @@ SCENARIO("Sort", "[s]") {
 	std::string output_file_name = "F:\\1\\sorted_database.txt";
 
 	//Database_Creator database_creator(database_file_name, names_file_name, surnames_file_name, n_persons);
-	Database_Sorter database_sorter1(database_file_name, output_file_name, RAM_amount);
-        Database_Sorter database_sorter1(database_file_name, output_file_name, RAM_amount);
-        Database_Sorter database_sorter1(database_file_name, output_file_name, RAM_amount);
+	Database_Sorter database_sorter1("8.txt", "1", 1);
+        Database_Sorter database_sorter2("16.txt", "2", 4);
+        Database_Sorter database_sorter3("16.txt", "3", 17);
 	size_t start = clock();
-	database_sorter.sortDatabase();
+	database_sorter1.sortDatabase();
+	database_sorter2.sortDatabase();
+	database_sorter3.sortDatabase();
 	size_t result = clock() - start;
-	database_sorter.closeDatabase();
+	database_sorter1.closeDatabase();
+	database_sorter2.closeDatabase();
+	database_sorter3.closeDatabase();
 	std::cout << "Result " << result << std::endl;
 
 	for (size_t i = 0; i < 100; i++) {
 		size_t person1_i = rand() % n_persons;
 		size_t person2_i = person1_i + rand() % (n_persons - person1_i);
-		person person1 = readPerson(output_file_name, person1_i);
-		person person2 = readPerson(output_file_name, person2_i);
+		person person1 = readPerson("1", person1_i);
+		person person2 = readPerson("1", person2_i);
 		REQUIRE(isANotMoreThanB(person1, person2));
 	}
 }
