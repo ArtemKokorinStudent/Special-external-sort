@@ -179,12 +179,7 @@ private:
 		size_t currentTargetFileI;
 		std::string str1, str2, str3;
 		while (!base_file.eof()) {
-			base_file >> str1;
-			current_person.name_i = str1.length() + 1;
-			base_file >> str2;
-			current_person.name_length = str2.length();
-			base_file >> str3;
-                        current_person.putStr(str1 + " " + str2 + " " + str3);
+			base_file >> current_person;
 			currentTargetFileI = current_person.i(sort_i);
 			if (files[currentTargetFileI].is_empty) {
 				files[currentTargetFileI].openNew(calcDerivedFileName(base_file_name, currentTargetFileI));
