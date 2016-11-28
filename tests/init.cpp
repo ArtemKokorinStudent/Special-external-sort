@@ -48,7 +48,7 @@ SCENARIO("Sort", "[s]") {
 	size_t start = clock();
 	database_sorter1.sortDatabase();
 	database_sorter2.sortDatabase();
-	//database_sorter3.sortDatabase();
+	database_sorter3.sortDatabase();
 	size_t result = clock() - start;
 	database_sorter1.closeDatabase();
 	database_sorter2.closeDatabase();
