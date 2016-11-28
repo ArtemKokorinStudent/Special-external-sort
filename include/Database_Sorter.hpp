@@ -187,10 +187,7 @@ private:
 			base_file >> str2;
 			current_person.name_length = str2.length();
 			base_file >> str3;
-			str1 += " " + str2 + " " + str3;
-			current_person.str = new char[str1.length() + 1];
-			strncpy(current_person.str, str1.c_str(), str1.length());
-			current_person.str[str1.length()] = '\0';
+                        current_person.putStr(str1 + " " + str2 + " " + str3);
 			currentTargetFileI = current_person.i(sort_i);
 			if (files[currentTargetFileI].is_empty) {
 				files[currentTargetFileI].openNew(calcDerivedFileName(base_file_name, currentTargetFileI));
