@@ -44,15 +44,15 @@ SCENARIO("Sort", "[s]") {
 	//Database_Creator database_creator(database_file_name, names_file_name, surnames_file_name, n_persons);
 	Database_Sorter database_sorter1("8.txt", "1.txt", 1, "1\\");
         Database_Sorter database_sorter2("16.txt", "2.txt", 4, "2\\");
-        //Database_Sorter database_sorter3("16.txt", "3", 17, "3\\");
+        Database_Sorter database_sorter3("16.txt", "3.txt", 17, "3\\");
 	size_t start = clock();
 	database_sorter1.sortDatabase();
 	database_sorter2.sortDatabase();
-	//database_sorter3.sortDatabase();
+	database_sorter3.sortDatabase();
 	size_t result = clock() - start;
 	database_sorter1.closeDatabase();
 	database_sorter2.closeDatabase();
-	//database_sorter3.closeDatabase();
+	database_sorter3.closeDatabase();
 	std::cout << "Result " << result << std::endl;
 
 	for (size_t i = 0; i < 100; i++) {
