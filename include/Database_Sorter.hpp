@@ -141,7 +141,7 @@ private:
 			full_bucket_i = currentI;
 			buckets[currentI].push_back(std::move(person));
 			if (is_same) {
-				if (key != currentI) {
+				if (full_bucket_i != currentI) {
 					is_same = false;
 				}
 			}
