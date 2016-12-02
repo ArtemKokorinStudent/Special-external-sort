@@ -1,5 +1,6 @@
 #include <fstream>
 #include <string>
+#include <map>
 #include <unordered_map>
 #include <utility>
 #include <algorithm>
@@ -7,54 +8,50 @@
 #include "person.hpp"
 #include <ctime>
 
-using Files = std::unordered_map<std::string, std::ofstream>;
+using Occurences = std::unordered_map<person, size_t, PersonHash>;
 using String = std::string const &;
-void append(String file_name, std::ofstream & to) {
-	std::ifstream file(file_name);
-	char ch;
-	while (file.get(ch)) {
-		to.put(ch);
-	}
-	file.close();
-}
-Files stuffToFiles(String database_file_name, String vault_name) {
-	Files files;
-	std::ifstream database(database_file_name);
+
+Occurences countOccurences(String database_file_name) {
+	Occurences distribution;
+	std::ifstream database(database_file_name, std::ios::binary);
 	while (!database.eof()) {
 		person current_person;
 		database >> current_person;
-		auto search = files.find(current_person.name);
-		if (search == files.end()) {
-			files.insert(std::make_pair(current_person.name,
-				std::ofstream(vault_name + current_person.name + ".txt")));
-			files[current_person.name] << current_person;
+		auto search = distribution.find(current_person);
+		if (search == distribution.end()) {
+			distribution.insert({ current_person, 1 });
 		}
 		else {
-			(*search).second << std::endl << current_person;
+			search->second++;
 		}
 	}
-	for (auto it = files.begin(); it != files.end(); ++it) {
-		(*it).second.close();
-	}
 	database.close();
-	return files;
+	return distribution;
 }
-void collect(Files & files, String output_file_name, String vault_name) {
-	std::ofstream output_file(output_file_name);
-	std::vector<std::string> sorted_names;
-	sorted_names.reserve(files.size());
-	for (auto it = files.begin(); it != files.end(); ++it) {
-		sorted_names.push_back((*it).first);
+void outputSortedDistribution(Occurences & occurences, String output_file_name)
+{
+	std::ofstream output_file(output_file_name, std::ios::binary);
+
+	std::vector<person> sorted_persons;
+	sorted_persons.reserve(occurences.size());
+	for (auto it = occurences.begin(); it != occurences.end(); ++it) {
+		sorted_persons.push_back(it->first);
 	}
-	std::sort(sorted_names.begin(), sorted_names.end());
-	size_t start = clock();
-	for (auto file_name : sorted_names) {
-		append(vault_name + file_name + ".txt", output_file);
+	std::sort(sorted_persons.begin(), sorted_persons.end(), [](person a, person b) {
+		return a.name < b.name;
+	});
+
+	for (auto current_person : sorted_persons) {
+		std::string str = current_person.surname + " "
+			+ current_person.name + " " + current_person.year + "\r\n";
+		for (size_t i = 0; i < occurences[current_person]; i++) {
+			output_file.write(str.c_str(), str.size());
+		}
 	}
-	size_t result = clock() - start; //4s (debug, on)
+
 	output_file.close();
 }
-void externalSort(String database_file_name, String output_file_name, size_t RAM, String vault_name) {
-	Files set = stuffToFiles(database_file_name, vault_name);
-	collect(set, output_file_name, vault_name);
+void externalSort(String database_file_name, String output_file_name, size_t RAM) {
+	Occurences occurences = countOccurences(database_file_name);
+	outputSortedDistribution(occurences, output_file_name);
 }
