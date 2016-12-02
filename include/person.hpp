@@ -1,9 +1,23 @@
 #include <string>
-struct person {
+struct person 
+{
 	std::string surname;
 	std::string name;
 	std::string year;
 };
+struct PersonHash 
+{
+	std::size_t operator()(person const & s) const
+	{
+		std::size_t h1 = std::hash<std::string>{}(s.surname);
+		std::size_t h2 = std::hash<std::string>{}(s.name);
+		std::size_t h3 = std::hash<std::string>{}(s.year);
+		return h1 ^ ((h2 ^ (h3 << 1)) << 1); // or use boost::hash_combine
+	}
+};
+bool operator==(const person & left, const person & right) {
+	return left.name == right.name;
+}
 std::ostream & operator<<(std::ostream & output, person const & _person)
 {
 	output << _person.surname << " ";
