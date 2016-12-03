@@ -11,7 +11,7 @@ SCENARIO("Sort", "[s]") {
 	std::cout << "Sort time: " << clock() - start << std::endl;
 
 	const int n_persons = 422000;
-	for (size_t i = 0; i < 168; i++) {
+	for (size_t i = 0; i < 1; i++) {
 		size_t person1_i = rand() % n_persons;
 		size_t person2_i = person1_i + rand() % (n_persons - person1_i);
 		person person1 = readPersonFromFile(output_file_name, person1_i);
