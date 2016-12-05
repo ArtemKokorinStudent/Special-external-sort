@@ -24,17 +24,17 @@ SCENARIO("Sort", "[s]") {
 	size_t start = clock();
 	externalSort("8.txt", "F:\\1\\sorted_database", 1);
 	std::cout << "Sort time 8(microseconds): " << clock() - start << std::endl;
-	std::cout << "File was: " << fileSize("8") << std::endl;
+	std::cout << "File was: " << fileSize("8.txt") << std::endl;
 	std::cout << "Output size: " << fileSize(output_file_name) << std::endl;
 	start = clock();
 	externalSort("16.txt", "F:\\1\\sorted_database", 1);
 	std::cout << "Sort time 15(microseconds): " << clock() - start << std::endl;
-	std::cout << "File was: " << fileStr("16") << " " << fileSize("16") << std::endl;
+	std::cout << "File was: " << fileStr("16.txt") << " " << fileSize("16.txt") << std::endl;
 	std::cout << "Output size: " << fileStr(output_file_name) << " " << fileSize(output_file_name)<< std::endl;
 	start = clock();
 	externalSort("32.txt", "F:\\1\\sorted_database", 1);
 	std::cout << "Sort time 32(microseconds): " << clock() - start << std::endl;
-		std::cout << "File was: " << fileStr("32") << " " << fileSize("32") << std::endl;
+		std::cout << "File was: " << fileStr("32.txt") << " " << fileSize("32.txt") << std::endl;
 	std::cout << "Output size: " << fileStr(output_file_name) << " " << fileSize(output_file_name)<< std::endl;
 
 	const int n_persons = 422000;
