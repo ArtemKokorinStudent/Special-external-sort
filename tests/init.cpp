@@ -2,16 +2,16 @@
 #include <iostream>
 #include "externalSort.hpp"
 size_t fileSize(std::string const & file_name) {
-        std::ifstream is(file_name, std::ifstream::binary);
+	std::ifstream is(file_name, std::ifstream::binary);
 	is.seekg(0, is.end);
 	size_t file_size = is.tellg();
 	is.close();
 	return file_size;
 }
 size_t fileStr(std::string const & file_name) {
-        std::ifstream is(file_name, std::ifstream::binary);
+	std::ifstream is(file_name, std::ifstream::binary);
 	size_t res = 0;
-	while(!is.eof()) {
+	while (!is.eof()) {
 		person p;
 		is >> p;
 		res++;
@@ -19,23 +19,21 @@ size_t fileStr(std::string const & file_name) {
 	is.close();
 	return res;
 }
+void testingSort(std::string const & file_name, std::string const & output_file_name, size_t RAM) {
+	std::cout << std::endl;
+	timer.start();
+	externalSort(file_name, output_file_name, RAM);
+	timer.measure();
+	std::cout << "Sort time of " << file_name << "(ms): " << timer.result << std::endl;
+	std::cout << "File was: " << fileSize(file_name) << " bytes." << std::endl;
+	std::cout << "Output size: " << fileSize(output_file_name) << " bytes." << std::endl;
+	std::cout << std::endl;
+}
 SCENARIO("Sort", "[s]") {
 	const std::string output_file_name = "F:\\1\\sorted_database";
-	size_t start = clock();
-	externalSort("8.txt", "F:\\1\\sorted_database", 1);
-	std::cout << "Sort time 8(microseconds): " << clock() - start << std::endl;
-	std::cout << "File was: " << fileSize("8.txt") << std::endl;
-	std::cout << "Output size: " << fileSize(output_file_name) << std::endl;
-	start = clock();
-	externalSort("16.txt", "F:\\1\\sorted_database", 1);
-	std::cout << "Sort time 15(microseconds): " << clock() - start << std::endl;
-	std::cout << "File was: " << fileStr("16.txt") << " " << fileSize("16.txt") << std::endl;
-	std::cout << "Output size: " << fileStr(output_file_name) << " " << fileSize(output_file_name)<< std::endl;
-	start = clock();
-	externalSort("32.txt", "F:\\1\\sorted_database", 1);
-	std::cout << "Sort time 32(microseconds): " << clock() - start << std::endl;
-		std::cout << "File was: " << fileStr("32.txt") << " " << fileSize("32.txt") << std::endl;
-	std::cout << "Output size: " << fileStr(output_file_name) << " " << fileSize(output_file_name)<< std::endl;
+	testingSort("8.txt", output_file_name, 1);
+	testingSort("16.txt", output_file_name, 4);
+	testingSort("32.txt", output_file_name, 17);
 
 	const int n_persons = 422000;
 	for (size_t i = 0; i < 1; i++) {
