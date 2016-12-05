@@ -16,7 +16,7 @@ struct PersonHash
 	}
 };
 bool operator==(const person & left, const person & right) {
-	return left.name == right.name;
+	return left.name == right.name && left.surname == right.surname && left.year == right.year;
 }
 std::ostream & operator<<(std::ostream & output, person const & _person)
 {
@@ -32,7 +32,7 @@ std::istream & operator>>(std::istream & input, person & _person)
 	input >> _person.year;
 	return input;
 }
-person readPersonFromFile(std::string file_name, size_t index) {
+person readPersonFromFile(std::string const & file_name, size_t index) {
 	person result;
 	std::ifstream file(file_name);
 	for (size_t i = 0; i < index + 1; i++) {
