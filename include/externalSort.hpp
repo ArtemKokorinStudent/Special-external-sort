@@ -42,7 +42,7 @@ void outputSortedDistribution(Occurences & occurences, String output_file_name)
 
 	for (auto current_person : sorted_persons) {
 		std::string str = current_person.surname + " "
-			+ current_person.name + " " + current_person.year + "\r\n";
+			+ current_person.name + " " + current_person.year + "\n";
 		for (size_t i = 0; i < occurences[current_person]; i++) {
 			output_file.write(str.c_str(), str.size());
 		}
