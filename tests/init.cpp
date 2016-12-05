@@ -13,7 +13,8 @@ SCENARIO("Sort", "[s]") {
 	size_t start = clock();
 	externalSort("8.txt", "F:\\1\\sorted_database.txt", 1);
 	std::cout << "Sort time 8(microseconds): " << clock() - start << std::endl;
-	std::cout << "File size: " << fileSize(output_file_name)<< std::endl;
+	std::cout << "File was: " << fileSize("8.txt") << std::endl;
+	std::cout << "File size: " << fileSize(output_file_name) << std::endl;
 	start = clock();
 	externalSort("16.txt", "F:\\1\\sorted_database.txt", 1);
 	std::cout << "Sort time 15(microseconds): " << clock() - start << std::endl;
