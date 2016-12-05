@@ -1,12 +1,19 @@
 #include "catch.hpp"
 #include <iostream>
 #include "externalSort.hpp"
-
+size_t fileSize(std::string & const str) {
+        std::ifstream is(file_name, std::ifstream::binary);
+	is.seekg(0, is.end);
+	size_t file_size = is.tellg();
+	is.close();
+	return file_size;
+}
 SCENARIO("Sort", "[s]") {
 	const std::string output_file_name = "F:\\1\\sorted_database.txt";
 	size_t start = clock();
 	externalSort("8.txt", "F:\\1\\sorted_database.txt", 1);
 	std::cout << "Sort time 8(microseconds): " << clock() - start << std::endl;
+	std::cout << "File size: " << fileSize(output_file_name);
 	start = clock();
 	externalSort("16.txt", "F:\\1\\sorted_database.txt", 1);
 	std::cout << "Sort time 15(microseconds): " << clock() - start << std::endl;
