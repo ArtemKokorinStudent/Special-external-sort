@@ -34,8 +34,8 @@ SCENARIO("Sort", "[s]") {
 	start = clock();
 	externalSort("32.txt", "F:\\1\\sorted_database.txt", 1);
 	std::cout << "Sort time 32(microseconds): " << clock() - start << std::endl;
-	std::cout << "File was: " << fileSize("32.txt") << std::endl;
-	std::cout << "Output size: " << fileSize(output_file_name)<< std::endl;
+		std::cout << "File was: " << fileStr("32.txt") << " " << fileSize("32.txt") << std::endl;
+	std::cout << "Output size: " << fileStr(output_file_name) << " " << fileSize(output_file_name)<< std::endl;
 
 	const int n_persons = 422000;
 	for (size_t i = 0; i < 1; i++) {
