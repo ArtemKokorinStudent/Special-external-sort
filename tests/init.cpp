@@ -6,9 +6,13 @@ SCENARIO("Sort", "[s]") {
 	const std::string output_file_name = "F:\\1\\sorted_database.txt";
 	size_t start = clock();
 	externalSort("8.txt", "F:\\1\\sorted_database.txt", 1);
+	std::cout << "Sort time 8: " << clock() - start << std::endl;
+	start = clock();
 	externalSort("16.txt", "F:\\1\\sorted_database.txt", 1);
+	std::cout << "Sort time 15: " << clock() - start << std::endl;
+	start = clock();
 	externalSort("32.txt", "F:\\1\\sorted_database.txt", 1);
-	std::cout << "Sort time: " << clock() - start << std::endl;
+	std::cout << "Sort time 32: " << clock() - start << std::endl;
 
 	const int n_persons = 422000;
 	for (size_t i = 0; i < 1; i++) {
