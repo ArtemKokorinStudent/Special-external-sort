@@ -1,7 +1,7 @@
 #include "catch.hpp"
 #include <iostream>
 #include "externalSort.hpp"
-size_t fileSize(std::string & file_name) {
+size_t fileSize(std::string & const file_name) {
         std::ifstream is(file_name, std::ifstream::binary);
 	is.seekg(0, is.end);
 	size_t file_size = is.tellg();
