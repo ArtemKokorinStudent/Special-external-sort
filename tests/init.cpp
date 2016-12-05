@@ -8,6 +8,17 @@ size_t fileSize(std::string const & file_name) {
 	is.close();
 	return file_size;
 }
+size_t fileStr(std::string const & file_name) {
+        std::ifstream is(file_name, std::ifstream::binary);
+	size_t res = 0;
+	while(!is.eof()) {
+		person p;
+		is >> p;
+		res++;
+	}
+	is.close();
+	return res;
+}
 SCENARIO("Sort", "[s]") {
 	const std::string output_file_name = "F:\\1\\sorted_database.txt";
 	size_t start = clock();
