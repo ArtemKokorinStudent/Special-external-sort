@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <vector>
 #include "person.hpp"
-#include <ctime>
+#include "timer.hpp"
 
 using Occurences = std::unordered_map<person, size_t, PersonHash>;
 using String = std::string const &;
@@ -42,12 +42,11 @@ void outputSortedDistribution(Occurences & occurences, String output_file_name)
 
 	for (auto current_person : sorted_persons) {
 		std::string str = current_person.surname + " "
-			+ current_person.name + " " + current_person.year + "\n";
+			+ current_person.name + " " + current_person.year + "\r\n";
 		for (size_t i = 0; i < occurences[current_person]; i++) {
 			output_file.write(str.c_str(), str.size());
 		}
 	}
-
 	output_file.close();
 }
 void externalSort(String database_file_name, String output_file_name, size_t RAM) {
