@@ -9,6 +9,6 @@ struct Timer {
 		time = std::clock();
 	}
 	void measure() {
-		result = 1000.0 * (std::clock() - time) / CLOCKS_PER_SEC;
+		result = static_cast<clock_t>(1000.0) * (std::clock() - time) / CLOCKS_PER_SEC;
 	}
 } timer;
