@@ -8,9 +8,7 @@
 #include "timer.hpp"
 
 using Occurences = std::unordered_map<person, size_t, PersonHash>;
-using String = std::string const &;
-
-Occurences countOccurences(String database_file_name) {
+Occurences countOccurences(std::string const & database_file_name) {
 	Occurences distribution;
 	std::ifstream database(database_file_name, std::ios::binary);
 	while (!database.eof()) {
@@ -27,7 +25,7 @@ Occurences countOccurences(String database_file_name) {
 	database.close();
 	return distribution;
 }
-void outputSortedDistribution(Occurences & occurences, String output_file_name)
+void outputSortedDistribution(Occurences & occurences, std::string const & output_file_name)
 {
 	std::ofstream output_file(output_file_name, std::ios::binary);
 
@@ -42,14 +40,15 @@ void outputSortedDistribution(Occurences & occurences, String output_file_name)
 
 	for (auto current_person : sorted_persons) {
 		std::string str = current_person.surname + " "
-			+ current_person.name + " " + current_person.year + "\n";
+			+ current_person.name + " " + current_person.year + "\r\n";
 		for (size_t i = 0; i < occurences[current_person]; i++) {
 			output_file.write(str.c_str(), str.size());
 		}
 	}
 	output_file.close();
 }
-void externalSort(String database_file_name, String output_file_name, size_t RAM) {
+void externalSort(std::string const & database_file_name,
+	std::string const & output_file_name, size_t const RAM) {
 	Occurences occurences = countOccurences(database_file_name);
 	outputSortedDistribution(occurences, output_file_name);
 }
