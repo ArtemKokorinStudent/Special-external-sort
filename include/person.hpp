@@ -32,7 +32,7 @@ std::istream & operator>>(std::istream & input, person & _person)
 	input >> _person.year;
 	return input;
 }
-person readPersonFromFile(std::string const & file_name, size_t index) {
+person readPersonFromFile(std::string const & file_name, size_t const index) {
 	person result;
 	std::ifstream file(file_name);
 	for (size_t i = 0; i < index + 1; i++) {
